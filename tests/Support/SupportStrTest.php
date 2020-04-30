@@ -167,6 +167,7 @@ class SupportStrTest extends TestCase
     {
         $this->assertEquals(['Class', 'method'], Str::parseCallback('Class@method', 'foo'));
         $this->assertEquals(['Class', 'foo'], Str::parseCallback('Class', 'foo'));
+        $this->assertEquals(['Class', null], Str::parseCallback('Class'));
     }
 
     public function testSlug()
@@ -177,6 +178,9 @@ class SupportStrTest extends TestCase
         $this->assertSame('hello_world', Str::slug('hello_world', '_'));
         $this->assertSame('user-at-host', Str::slug('user@host'));
         $this->assertSame('سلام-دنیا', Str::slug('سلام دنیا', '-', null));
+        $this->assertSame('sometext', Str::slug('some text', ''));
+        $this->assertSame('', Str::slug('', ''));
+        $this->assertSame('', Str::slug(''));
     }
 
     public function testStrStart()

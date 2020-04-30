@@ -424,7 +424,7 @@ class Collection extends BaseCollection implements QueueableCollection
     /**
      * Get an array with the values of a given key.
      *
-     * @param  string  $value
+     * @param  string|array  $value
      * @param  string|null  $key
      * @return \Illuminate\Support\Collection
      */
@@ -557,7 +557,7 @@ class Collection extends BaseCollection implements QueueableCollection
      */
     public function getQueueableRelations()
     {
-        return $this->isNotEmpty() ? $this->first()->getQueueableRelations() : [];
+        return $this->isEmpty() ? [] : array_intersect(...$this->map->getQueueableRelations()->all());
     }
 
     /**
